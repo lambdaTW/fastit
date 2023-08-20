@@ -89,7 +89,6 @@ git commit -m "build: python packages" -m "build: basic folder structure"
 # 本次目錄
 ```
 .
-├── Makefile
 ├── docs
 │   ├── day1.md
 │   ├── day2.md
@@ -99,18 +98,18 @@ git commit -m "build: python packages" -m "build: basic folder structure"
 │   └── base.txt        # 新增
 ├── requirements.txt    # 新增
 └── src
-    └── app
-        ├── __pycache__
-        ├── api
-        │   └── v1
-        │       └── endpoints
-        │           └── __init__.py
-        ├── core
-        ├── crud
-        ├── db
-        ├── migrations
-        ├── models
-        ├── schemas
-        ├── scripts
-        └── tests
+    ├── app
+    │   ├── __pycache__
+    │   ├── api
+    │   │   └── v1
+    │   │       └── endpoints
+    │   │           └── __init__.py
+    │   ├── crud
+    │   ├── db
+    │   ├── migrations
+    │   ├── models
+    │   └── schemas
+    ├── tests
+    ├── core
+    └── scripts
 ```

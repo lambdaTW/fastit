@@ -23,19 +23,20 @@
 │   └── development.txt # 程式自動產生的開發時需要的套件以及他的依賴
 ├── requirements.txt    # 必要安裝套件通常指向 `requirements/base.txt`
 └── src
-    └── app
-        ├── api
-        │   └── v1
-        │       └── endpoints    # 真的 API 程式碼放這邊
-        │           └── __init__.py
-        ├── core         # 設定檔或是其他專案共用的程式碼放這邊
-        ├── crud         # 對資料庫進行操作的程式碼
-        ├── db           # 資料庫核心程式碼
-        ├── migrations   # 對資料庫進行資料表遷移的程式碼 (大部分由 alembic 自動產生)
-        ├── models       # 資料表 <-- 對應 --> Python 程式
-        ├── schemas      # 和客戶端交換的資料 (byte)  <-- 對應 --> Python 程式
-        ├── scripts      # 其他腳本程式碼
-        └── tests        # 測試程式碼
+    ├── app
+    │   ├── __pycache__
+    │   ├── api    # 真的 API 程式碼放這邊
+    │   │   └── v1
+    │   │       └── endpoints
+    │   │           └── __init__.py
+    │   ├── crud          # 對資料庫進行操作的程式碼
+    │   ├── db            # 資料庫核心程式碼
+    │   ├── migrations    # 對資料庫進行資料表遷移的程式碼 (大部分由 alembic 自動產生)
+    │   ├── models        # 資料表 <-- 對應 --> Python 程式
+    │   └── schemas       # 和客戶端交換的資料 (byte)  <-- 對應 --> Python 程式
+    ├── tests             # 測試程式碼
+    ├── core              # 設定檔或是其他專案共用的程式碼放這邊
+    └── scripts           # 其他腳本程式碼
 ```
 
 ## 如何開始

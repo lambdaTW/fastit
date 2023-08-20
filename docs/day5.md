@@ -115,19 +115,19 @@ git commit -m "chore: add lint tools and lint config"
 ├── requirements.txt
 ├── setup.cfg    # 新增
 └── src
-    └── app
-        ├── __pycache__
-        ├── api
-        │   └── v1
-        │       └── endpoints
-        │           └── __init__.py
-        ├── core
-        ├── crud
-        ├── db
-        ├── main.py
-        ├── migrations
-        ├── models
-        ├── schemas
-        ├── scripts
-        └── tests
+    ├── app
+    │   ├── __pycache__
+    │   ├── api
+    │   │   └── v1
+    │   │       └── endpoints
+    │   │           └── __init__.py
+    │   ├── crud
+    │   ├── db
+    │   ├── main.py    # 新增
+    │   ├── migrations
+    │   ├── models
+    │   └── schemas
+    ├── tests
+    ├── core
+    └── scripts
 ```
