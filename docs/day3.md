@@ -1,8 +1,8 @@
 # Python 套件管理
-問：可以寫程式了嗎？
+小獅：可以寫程式了嗎？
 
 ## 虛擬環境
-答：裝好 `git` 以後，我們需要使用 Python 的虛擬環境來隔離專案使用的套件和系統使用的套件，防止專案套件和系統套件相互污染
+老獅：裝好 `git` 以後，我們需要使用 Python 的虛擬環境來隔離專案使用的套件和系統使用的套件，防止專案套件和系統套件相互污染
 
 ```shell
 # 建立虛擬環境
@@ -13,13 +13,13 @@ source venv/bin/activate
 ```
 
 ## 安裝套件
-答：我們使用 `pip-tools` 來做套件管理，將其設定好以後，最後我們就可以真的安裝 FastAPI 本人了
+老獅：我們使用 `pip-tools` 來做套件管理，將其設定好以後，最後我們就可以真的安裝 FastAPI 本人了
 
 ```shell
 # 安裝 pip-tools
 pip3 install -U pip && pip3 install -U pip-tools
 ```
-答：更新以下檔案讓我們可以安裝套件 (第一行是註解，表示該檔案位置)
+老獅：更新以下檔案讓我們可以安裝套件 (第一行是註解，表示該檔案位置)
 ```txt
 # requirements.txt
 -r requirements/base.txt
@@ -29,7 +29,7 @@ pip3 install -U pip && pip3 install -U pip-tools
 fastapi==0.101.1
 uvicorn[standard]==0.23.2
 ```
-答：最後我們讓 `pip-tools` 幫我們產生依賴套件，並且安裝所有套件以及其依賴
+老獅：最後我們讓 `pip-tools` 幫我們產生依賴套件，並且安裝所有套件以及其依賴
 
 ```shell
 # 產生所有依賴
@@ -38,8 +38,8 @@ ls requirements/*.in | xargs -n1 pip-compile --resolver=backtracking --strip-ext
 pip-sync `ls requirements/*.txt`
 
 ```
-問：如何確定我裝好了
-答：你可以列出你安裝好的套件，看有沒有和我差不多的輸出
+小獅：如何確定我裝好了
+老獅：你可以列出你安裝好的套件，看有沒有和我差不多的輸出
 
 
 ```shell
@@ -77,8 +77,8 @@ wheel             0.41.1
 ```
 
 ## 開始寫程式
-問：我安裝都沒有問題了，可以開始寫程式了嗎？
-答：明天再說拉，老闆給那麼少錢，先摸魚好嗎？先把今天的進度提交到 git 吧
+小獅：我安裝都沒有問題了，可以開始寫程式了嗎？
+老獅：明天再說拉，老闆給那麼少錢，先摸魚好嗎？先把今天的進度提交到 git 吧
 
 ```
 git add src requirements requirements.txt

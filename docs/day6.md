@@ -1,17 +1,17 @@
 # FastAPI
 
-問：好了，檢查點寫完了，FastAPI 也沒多厲害啊！和 flask 差不多嘛？
+小獅：好了，檢查點寫完了，FastAPI 也沒多厲害啊！和 flask 差不多嘛？
 
-答：你可以用瀏覽器打開 `http://localhost:8000/docs` 看看
+老獅：你可以用瀏覽器打開 `http://localhost:8000/docs` 看看
 
 ![API docs](./images/day-6-api-docs.png)
 
-問：喔，有整合 OpenAPI document，但是好像給的資訊沒有很完整
+小獅：喔，有整合 OpenAPI document，但是好像給的資訊沒有很完整
 
-答：那是你寫的不完整，把那隻 API 加上 `Response Model` 看看
+老獅：那是你寫的不完整，把那隻 API 加上 `Response Model` 看看
 
 ## Response Model
-答：我們可以先定義好我們要回傳的格式
+老獅：我們可以先定義好我們要回傳的格式
 
 ```python
 # src/app/models/health_check.py
@@ -41,9 +41,9 @@ def root():
 
 ![API docs with response model](./images/day-6-api-docs-with-response-model.png)
 
-問：看起來真的清楚多了，以後就可以寫完以後叫前端自己去看了吧，嘿嘿
+小獅：看起來真的清楚多了，以後就可以寫完以後叫前端自己去看了吧，嘿嘿
 
-答：還是要溝通拉，但是大部分的案例，有經驗的前端可以更快速上手
+老獅：還是要溝通拉，但是大部分的案例，有經驗的前端可以更快速上手
 
 ```
 git add src/app/models
@@ -52,7 +52,7 @@ git add src/app/main.py
 git commit -m "feat: add health check response model"
 ```
 ## Async
-答：除了文件以外，FastAPI 還有支援原生的非同步，對於 HTTP 服務的效能來說，在不少情況下都有顯著的優化
+老獅：除了文件以外，FastAPI 還有支援原生的非同步，對於 HTTP 服務的效能來說，在不少情況下都有顯著的優化
 
 ```shell
 # 使用 k6 對同步的程式進行壓力測試
@@ -156,9 +156,9 @@ git add src/app/main.py
 git commit -m "perf: use async programming to speep up the API"
 ```
 
-問：他是怎麼辦到的？
+小獅：他是怎麼辦到的？
 
-答：他是透過作業系統提供的系統呼叫 `select`, `poll`, `epoll` 等方法，當系統發現該等待的工作完成了，才讓你做下一步驟，其他時間你可以去做別的事情，由於太底層有興趣可以去自己找相關文件，下面是虛擬碼供參考
+老獅：他是透過作業系統提供的系統呼叫 `select`, `poll`, `epoll` 等方法，當系統發現該等待的工作完成了，才讓你做下一步驟，其他時間你可以去做別的事情，由於太底層有興趣可以去自己找相關文件，下面是虛擬碼供參考
 
 ```python
 # os process 1: 註冊需要等待的程式，當硬體完成 IO 工作後，會通知作業系統

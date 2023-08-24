@@ -1,6 +1,5 @@
 # 為什麼使用 FastAPI
 
-答：
 FastAPI 是一個基於 Python 的現代化 Web 框架，它在建立 Web 應用程式時具有許多優勢，使其成為開發者的首選之一。以下是一些選擇使用 FastAPI 的原因：
 
 快速：正如其名稱所示，FastAPI 非常快速。它利用 Python 的靜態類型標註以及底層的 Starlette 框架，可以在處理請求時實現極高的效能。

@@ -1,8 +1,8 @@
 # 專案目錄
-問：專案目錄，是長怎樣的？
+小獅：專案目錄，是長怎樣的？
 
 ## 參考
-答：專案目錄，我們參考了 FastAPI 作者的 [專案範本](https://github.com/tiangolo/full-stack-fastapi-postgresql) 並且簡化成只有開發 API 的版本，如果有興趣的人可以看看作者使用 `cookiecutter` 製作的其他專案結構，其中包括
+老獅：專案目錄，我們參考了 FastAPI 作者的 [專案範本](https://github.com/tiangolo/full-stack-fastapi-postgresql) 並且簡化成只有開發 API 的版本，如果有興趣的人可以看看作者使用 `cookiecutter` 製作的其他專案結構，其中包括
 
 - Full Stack FastAPI PostgreSQL
 - Full Stack FastAPI Couchbase
@@ -10,7 +10,7 @@
 - Machine Learning models with spaCy and FastAPI
 
 ## 目錄本人
-答：你可以看到以下空白的專案目錄以及說明，我們未來會慢慢填滿他
+老獅：你可以看到以下空白的專案目錄以及說明，我們未來會慢慢填滿他
 ```txt
 .
 ├── docs    # 我放至此文章的地方，您可以寫你的專案文件
@@ -40,10 +40,10 @@
 ```
 
 ## 如何開始
-問：目錄建立好了，還有什麼步驟要做嗎？
+小獅：目錄建立好了，還有什麼步驟要做嗎？
 
 ### Git
-答：我們使用 git 做版本控制，因此請先安裝 `git` 並且初始化此專案，並且先把 Python 用的 `.gitignore` 提交上去
+老獅：我們使用 git 做版本控制，因此請先安裝 `git` 並且初始化此專案，並且先把 Python 用的 `.gitignore` 提交上去
 
 ```shell
 # 初始化專案版控
