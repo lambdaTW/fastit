@@ -209,7 +209,6 @@ while True:
     │   ├── main.py                # 更改
     │   ├── migrations
     │   ├── models
-    │   │   ├── __pycache__
     │   │   └── health_check.py    # 新增
     │   └── schemas
     ├── core
