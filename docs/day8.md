@@ -23,11 +23,11 @@ Response:
 
 老獅：你不覺得，其實你是在建立 token 嗎？
 
-小獅：好像是耶！那用 RESTful 來看，應該要放 `/api/v1/auth/users/tokens`
+小獅：好像是耶！那用 RESTful 來看，應該要放 `/v1/auth/users/tokens`
 
 ```txt
 Request:
-POST /api/v1/auth/users/tokens HTTP/1.1
+POST /v1/auth/users/tokens HTTP/1.1
 ...
 {"username": "...", "password": "..."}
 
