@@ -122,8 +122,8 @@ git commit -m "..."
     │   ├── main.py
     │   ├── migrations
     │   ├── models
-    │   │   └── health_check.py
     │   └── schemas
+    │       └── health_check.py
     ├── core
     │   └── config.py    # 新增
     ├── scripts

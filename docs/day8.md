@@ -133,8 +133,8 @@ git commit -m "test: the health endpoint"
     │   ├── main.py
     │   ├── migrations
     │   ├── models
-    │   │   └── health_check.py
     │   └── schemas
+    │       └── health_check.py
     ├── core
     │   └── config.py
     ├── scripts

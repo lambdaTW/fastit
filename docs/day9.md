@@ -230,8 +230,8 @@ git commit -m "feat: add the endpoint to create JWT token"
     │   ├── main.py    # 更新
     │   ├── migrations
     │   ├── models
-    │   │   └── health_check.py
     │   └── schemas
+    │       └── health_check.py
     ├── core
     │   └── config.py
     ├── scripts

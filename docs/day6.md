@@ -14,7 +14,7 @@
 老獅：我們可以先定義好我們要回傳的格式
 
 ```python
-# src/app/models/health_check.py
+# src/app/schemas/health_check.py
 import typing
 
 import pydantic
@@ -29,7 +29,7 @@ class HealthResponse(pydantic.BaseModel):
 # src/app/main.py
 import fastapi
 
-from app.models import health_check
+from app.schemas import health_check
 
 app = fastapi.FastAPI()
 
@@ -46,7 +46,7 @@ def root():
 老獅：還是要溝通拉，但是大部分的案例，有經驗的前端可以更快速上手
 
 ```
-git add src/app/models
+git add src/app/schemas
 git add src/app/main.py
 
 git commit -m "feat: add health check response model"
@@ -99,7 +99,7 @@ default ✓ [======================================] 10 VUs  30s
 # src/app/main.py
 import fastapi
 
-from app.models import health_check
+from app.schemas import health_check
 
 app = fastapi.FastAPI()
 
@@ -209,8 +209,8 @@ while True:
     │   ├── main.py                # 更改
     │   ├── migrations
     │   ├── models
-    │   │   └── health_check.py    # 新增
     │   └── schemas
+    │       └── health_check.py    # 新增
     ├── core
     ├── scripts
     └── tests
