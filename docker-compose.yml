@@ -1,0 +1,21 @@
+version: '3.6'
+
+services:
+  postgres:
+    restart: always
+    image: postgres:13.2-alpine
+    command: -c fsync=off
+    ports:
+      - "5432:5432"
+    environment:
+      - PGDATA=/pgtmpfs
+    env_file:
+      - src/.env
+    volumes:
+      - pg_vol:/pgtmpfs
+
+volumes:
+  pg_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
