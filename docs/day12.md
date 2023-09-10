@@ -115,7 +115,7 @@ from app.models import auth as auth_models
 
 
 @pytest.fixture
-async def db() -> typing.AsyncIterator[None]:
+async def db() -> typing.AsyncIterator[sqlalchemy_asyncio.AsyncSession]:
     engine = sqlalchemy_asyncio.create_async_engine(
         "postgresql+asyncpg://postgres@localhost:5432/db",
         echo=True,
@@ -162,6 +162,43 @@ async def test_create_and_read_user(
     )
     assert user.username == "username"
     assert user.password == "password"
+```
+
+小獅：fixture 是什麼意思？為什麼他可以拿到 `db` 這個參數？誰喂進去的？
+
+老獅：fixture 你可以把他想你在做某一個測試的時候，需要的一些資料，在 pytest 中有很多方式可以去產生他或是使用它，我們這邊用 `function` 定義他，並且讓 pytest 依照名稱，去做參照把它放到我們測試的程式，當作參數。以下，假裝我們是 pytest，我們來把這些 fixture 放到測試中
+
+```python
+def db():
+    return "the db would be"
+
+
+def action():
+    return "droped"
+
+
+def test_db(db: str, action: str):
+    print(db, action)
+
+
+print("pytest 拿到的所有東西：", locals())
+
+# 收集所有測試程式
+tests = [key for key in locals() if key.startswith("test_")]
+
+# 依照名稱獲取 fixtures 然後跑測試，實際上會更複雜，他會去判斷 fixtures 的相依性，由上而下喂給所有 fixtures 最後才把跑完的 fixtures 給真正要跑測試的程式去跑，這又被叫做 dependency injection 的設計
+for test_function_name in tests:
+    test_function = locals()[test_function_name]
+    fixtures = test_function.__annotations__
+    print("test function 需要的東西們:", fixtures)
+    fixture_results = {}
+    for fixture in fixtures:
+        fixture_function = locals()[fixture]
+        # 這邊用 sync 的程式展演，在我們的案例上其實是 async function
+        if callable(fixture_function):
+            fixture_results[fixture] = fixture_function()
+    # 拿跑完的 fixtures results 給測試用
+    test_function(**fixture_results)
 ```
 
 ```shell
