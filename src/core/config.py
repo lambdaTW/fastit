@@ -1,4 +1,5 @@
 import pathlib
+import typing
 
 import pydantic_settings
 
@@ -9,6 +10,7 @@ print(PROJECT_PATH)
 class Settings(pydantic_settings.BaseSettings):
     authjwt_secret_key: str = "secret"
     DATABASE_URL: str
+    MODE: typing.Literal["test", "development", "production"] = "development"
     model_config = pydantic_settings.SettingsConfigDict(
         env_file=PROJECT_PATH / ".env",
         extra="ignore",

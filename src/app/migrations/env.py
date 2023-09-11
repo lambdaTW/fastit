@@ -94,5 +94,7 @@ def run_migrations_online() -> None:
 
 if context.is_offline_mode():
     run_migrations_offline()
+elif core_config.Settings().MODE == "test":
+    pass
 else:
     run_migrations_online()
