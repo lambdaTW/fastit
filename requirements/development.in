@@ -1,5 +1,5 @@
 # lint and format
-flake8==6.1.0
+ruff==0.0.287
 black==23.7.0
 isort==5.12.0
 

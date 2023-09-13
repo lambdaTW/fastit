@@ -1,3 +1,6 @@
+[tool.pytest.ini_options]
+addopts = "--asyncio-mode=auto"
+
 [tool.black]
 line-length = 88
 exclude = '''
@@ -16,3 +19,16 @@ line_length = 88
 extend_skip = [
     "venv",
 ]
+
+[tool.ruff]
+select = ["E", "F", "W"]
+fixable = ["ALL"]
+exclude = [
+    ".git",
+    "venv",
+    "migrations",
+    "tests"
+]
+line-length = 88
+# Assume Python 3.8
+target-version = "py38"
