@@ -54,5 +54,5 @@ curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Pytho
 
 # 提交 .gitignore
 git add .gitignore
-git commit -m "build: add .gitignore"
+git commit -m "chore: add .gitignore"
 ```
