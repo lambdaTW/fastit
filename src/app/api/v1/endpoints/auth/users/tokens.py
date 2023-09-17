@@ -5,7 +5,12 @@ import fastapi
 import jose
 from fastapi import security
 from jose import jwt
+from sqlalchemy.ext import asyncio as sqlalchemy_asyncio
+from sqlalchemy import func as sqlalchemy_func
+from sqlalchemy import future as sqlalchemy_future
 
+from app.api import dependencies
+from app.models import auth as auth_models
 from app.schemas import tokens as token_schemas
 from app.schemas import users as user_schemas
 from core import config
@@ -29,12 +34,30 @@ def create_access_token(
 
 
 @router.post("", response_model=token_schemas.JWT)
-def create_jtw_token(
-    user: user_schemas.LoginInfo,
+async def create_jtw_token(
+    login: user_schemas.LoginInfo,
+    db: sqlalchemy_asyncio.AsyncSession = fastapi.Depends(dependencies.get_db),
 ):
-    access_token = create_access_token(dict(sub=user.username))
-    refresh_token = create_access_token(dict(sub=user.username))
-    return {"access_token": access_token, "refresh_token": refresh_token}
+    user = (
+        (
+            await db.execute(
+                sqlalchemy_future.select(auth_models.User).filter(
+                    sqlalchemy_func.lower(auth_models.User.username)
+                    == sqlalchemy_func.lower(login.username)
+                    )
+            )
+        )
+        .scalars()
+        .first()
+    )
+    if user and login.password == user.password:
+        access_token = create_access_token(dict(sub=user.username))
+        refresh_token = create_access_token(dict(sub=user.username))
+        return {"access_token": access_token, "refresh_token": refresh_token}
+    raise fastapi.HTTPException(
+        fastapi.status.HTTP_401_UNAUTHORIZED,
+        {"msg": "Invliad username or password"}
+    )
 
 
 @router.get("/info")
