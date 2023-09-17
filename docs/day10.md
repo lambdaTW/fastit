@@ -49,7 +49,7 @@ FAILED src/tests/test_services/test_token.py::test_create_jwt_token_by_username_
 # src/app/api/v1/endpoints/auth/users/tokens.py
 
 @router.get("/info")
-def get_jtw_token_info():
+def get_jwt_token_info():
     return {"username": "test"}
 ```
 
