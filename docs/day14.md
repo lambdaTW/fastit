@@ -65,7 +65,7 @@ FAILED src/tests/test_units/test_users_crud.py::test_create_and_read_user - asyn
 ```txt
 fastapi==0.101.1
 uvicorn[standard]==0.23.2
-fastapi-jwt-auth==0.5.0
+python-jose[cryptography]==3.3.0
 pydantic-settings==2.0.3
 sqlalchemy[asyncio]==2.0.20
 asyncpg==0.28.0

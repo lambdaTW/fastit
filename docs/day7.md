@@ -15,7 +15,7 @@
 requirements/base.in
 fastapi==0.101.1
 uvicorn[standard]==0.23.2
-fastapi-jwt-auth==0.5.0
+python-jose[cryptography]==3.3.0
 ```
 
 ```shell
@@ -34,7 +34,7 @@ pip-sync `ls requirements/*.txt`
 requirements/base.in
 fastapi==0.101.1
 uvicorn[standard]==0.23.2
-fastapi-jwt-auth==0.5.0
+python-jose[cryptography]==3.3.0
 pydantic-settings==2.0.3
 ```
 

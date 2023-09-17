@@ -14,15 +14,17 @@ anyio==3.7.1
     #   watchfiles
 asyncpg==0.28.0
     # via -r requirements/base.in
+cffi==1.15.1
+    # via cryptography
 click==8.1.7
     # via uvicorn
+cryptography==41.0.3
+    # via python-jose
+ecdsa==0.18.0
+    # via python-jose
 exceptiongroup==1.1.3
     # via anyio
 fastapi==0.101.1
-    # via
-    #   -r requirements/base.in
-    #   fastapi-jwt-auth
-fastapi-jwt-auth==0.5.0
     # via -r requirements/base.in
 greenlet==2.0.2
     # via sqlalchemy
@@ -40,6 +42,12 @@ mako==1.2.4
     # via alembic
 markupsafe==2.1.3
     # via mako
+pyasn1==0.5.0
+    # via
+    #   python-jose
+    #   rsa
+pycparser==2.21
+    # via cffi
 pydantic==2.2.1
     # via
     #   fastapi
@@ -48,14 +56,18 @@ pydantic-core==2.6.1
     # via pydantic
 pydantic-settings==2.0.3
     # via -r requirements/base.in
-pyjwt==1.7.1
-    # via fastapi-jwt-auth
 python-dotenv==1.0.0
     # via
     #   pydantic-settings
     #   uvicorn
+python-jose==3.3.0
+    # via -r requirements/base.in
 pyyaml==6.0.1
     # via uvicorn
+rsa==4.9
+    # via python-jose
+six==1.16.0
+    # via ecdsa
 sniffio==1.3.0
     # via anyio
 sqlalchemy==2.0.20
