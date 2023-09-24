@@ -5,9 +5,9 @@ import fastapi
 import jose
 from fastapi import security
 from jose import jwt
-from sqlalchemy.ext import asyncio as sqlalchemy_asyncio
 from sqlalchemy import func as sqlalchemy_func
 from sqlalchemy import future as sqlalchemy_future
+from sqlalchemy.ext import asyncio as sqlalchemy_asyncio
 
 from app.api import dependencies
 from app.models import auth as auth_models
@@ -44,7 +44,7 @@ async def create_jtw_token(
                 sqlalchemy_future.select(auth_models.User).filter(
                     sqlalchemy_func.lower(auth_models.User.username)
                     == sqlalchemy_func.lower(login.username)
-                    )
+                )
             )
         )
         .scalars()
@@ -55,8 +55,7 @@ async def create_jtw_token(
         refresh_token = create_access_token(dict(sub=user.username))
         return {"access_token": access_token, "refresh_token": refresh_token}
     raise fastapi.HTTPException(
-        fastapi.status.HTTP_401_UNAUTHORIZED,
-        {"msg": "Invliad username or password"}
+        fastapi.status.HTTP_401_UNAUTHORIZED, {"msg": "Invliad username or password"}
     )
 
 

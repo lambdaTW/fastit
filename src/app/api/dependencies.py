@@ -1,9 +1,8 @@
 import functools
 
 import fastapi
-from sqlalchemy import orm
+from sqlalchemy import orm, pool
 from sqlalchemy.ext import asyncio as sqlalchemy_asyncio
-from sqlalchemy import pool
 
 from core import config
 
