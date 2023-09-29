@@ -2,12 +2,20 @@ import pathlib
 import typing
 from unittest import mock
 
+import httpx
 import pytest
 from sqlalchemy import orm
 from sqlalchemy.ext import asyncio as sqlalchemy_asyncio
 from sqlalchemy_utils import functions
 
+from app import main
 from core import config
+
+
+@pytest.fixture
+async def client() -> typing.AsyncIterator[httpx.AsyncClient]:
+    async with httpx.AsyncClient(app=main.app, base_url="http://test") as client:
+        yield client
 
 
 @pytest.fixture

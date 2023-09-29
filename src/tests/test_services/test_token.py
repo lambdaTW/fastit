@@ -13,6 +13,7 @@ from app.models import auth as auth_models
 
 @pytest.mark.asyncio
 async def test_create_jwt_token_by_username_and_passowrd(
+    client: httpx.AsyncClient,
     migrate: None,
     db: sqlalchemy_asyncio.AsyncSession,
 ):
@@ -28,21 +29,20 @@ async def test_create_jwt_token_by_username_and_passowrd(
     await db.commit()
     await db.flush()
 
-    async with httpx.AsyncClient(app=main.app, base_url="http://test") as client:
-        resp = await client.post(
-            "/v1/auth/users/tokens",
-            json=user_info,
-        )
-        assert resp.status_code == 200
-        data = resp.json()
-        assert (access_token := data["access_token"])
-        assert data["refresh_token"]
-        resp = await client.get(
-            "/v1/auth/users/tokens/info",
-            headers={"Authorization": f"Bearer {access_token}"},
-        )
-        assert resp.status_code == 200
-        assert resp.json()["username"] == username
+    resp = await client.post(
+        "/v1/auth/users/tokens",
+        json=user_info,
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert (access_token := data["access_token"])
+    assert data["refresh_token"]
+    resp = await client.get(
+        "/v1/auth/users/tokens/info",
+        headers={"Authorization": f"Bearer {access_token}"},
+    )
+    assert resp.status_code == 200
+    assert resp.json()["username"] == username
 
 
 @pytest.mark.asyncio
@@ -73,6 +73,7 @@ async def test_user_cannot_get_jwt_token_by_incorrect_passowrd(
 
 @pytest.mark.asyncio
 async def test_create_token_by_username_and_passowrd_hash(
+    client: httpx.AsyncClient,
     migrate: None,
     db: sqlalchemy_asyncio.AsyncSession,
 ):
@@ -109,26 +110,25 @@ async def test_create_token_by_username_and_passowrd_hash(
     await db.flush()
 
     # 模擬前端
-    async with httpx.AsyncClient(app=main.app, base_url="http://test") as client:
-        # 先獲取 hash 資訊
-        resp = await client.get(
-            f"/v1/auth/users/hashes?username={username}",
-        )
-        assert resp.status_code == 200
-        data = resp.json()
-        alg, cost, salt = data["alg"], data["cost"], data["salt"]
-        # 利用回傳回來的 hash 資訊做密碼 hash
-        password_hash = bcrypt.using(
-            ident=alg,
-            rounds=cost,
-            salt=salt,
-        ).hash(password)
-        # 真正做登入
-        resp = await client.post(
-            "/v1/auth/users/tokens",
-            json={
-                "username": username,
-                "password": password_hash,
-            },
-        )
-        assert resp.status_code == 200
+    # 先獲取 hash 資訊
+    resp = await client.get(
+        f"/v1/auth/users/hashes?username={username}",
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    alg, cost, salt = data["alg"], data["cost"], data["salt"]
+    # 利用回傳回來的 hash 資訊做密碼 hash
+    password_hash = bcrypt.using(
+        ident=alg,
+        rounds=cost,
+        salt=salt,
+    ).hash(password)
+    # 真正做登入
+    resp = await client.post(
+        "/v1/auth/users/tokens",
+        json={
+            "username": username,
+            "password": password_hash,
+        },
+    )
+    assert resp.status_code == 200
