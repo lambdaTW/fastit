@@ -2,13 +2,12 @@ import uuid
 
 import httpx
 import pytest
-from fastapi import encoders
 from passlib import context
 from passlib.hash import bcrypt
 from sqlalchemy.ext import asyncio as sqlalchemy_asyncio
 
 from app import main
-from app.models import auth as auth_models
+from app.crud import auth as auth_crud
 
 
 @pytest.mark.asyncio
@@ -23,10 +22,7 @@ async def test_create_jwt_token_by_username_and_passowrd(
         "username": username,
         "password": password,
     }
-    obj_in_data = encoders.jsonable_encoder(user_info)
-    user = auth_models.User(**obj_in_data)
-    db.add(user)
-    await db.commit()
+    await auth_crud.user.create(db, user_info)
     await db.flush()
 
     resp = await client.post(
@@ -56,10 +52,7 @@ async def test_user_cannot_get_jwt_token_by_incorrect_passowrd(
         "username": username,
         "password": password,
     }
-    obj_in_data = encoders.jsonable_encoder(user_info)
-    user = auth_models.User(**obj_in_data)
-    db.add(user)
-    await db.commit()
+    await auth_crud.user.create(db, user_info)
     await db.flush()
     user_info["password"] = "invalidpassword"
 
@@ -103,10 +96,7 @@ async def test_create_token_by_username_and_passowrd_hash(
         "username": username,
         "password": password_hash,
     }
-    obj_in_data = encoders.jsonable_encoder(user_info)
-    user = auth_models.User(**obj_in_data)
-    db.add(user)
-    await db.commit()
+    await auth_crud.user.create(db, user_info)
     await db.flush()
 
     # 模擬前端
