@@ -29,7 +29,6 @@
     user = auth_models.User(**obj_in_data)
     db.add(user)
     await db.commit()
-    await db.flush()
 ```
 
 ```python
