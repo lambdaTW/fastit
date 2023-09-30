@@ -21,17 +21,7 @@ async def test_create_and_read_user(
     await db.execute(sqlalchemy.text("select 1"))
     user = await auth_crud.user.create(db, obj_in)
     await db.flush()
-    user = (
-        (
-            await db.execute(
-                sqlalchemy_future.select(auth_models.User).where(
-                    auth_models.User.id == user.id
-                )
-            )
-        )
-        .scalars()
-        .first()
-    )
+    user = await auth_crud.user.get_by_username(db, username)
     assert user.username == "username"
     assert user.password == "password"
 

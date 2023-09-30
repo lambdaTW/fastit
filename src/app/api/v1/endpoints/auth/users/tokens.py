@@ -5,12 +5,10 @@ import fastapi
 import jose
 from fastapi import security
 from jose import jwt
-from sqlalchemy import func as sqlalchemy_func
-from sqlalchemy import future as sqlalchemy_future
 from sqlalchemy.ext import asyncio as sqlalchemy_asyncio
 
 from app.api import dependencies
-from app.models import auth as auth_models
+from app.crud import auth as auth_crud
 from app.schemas import tokens as token_schemas
 from app.schemas import users as user_schemas
 from core import config
@@ -38,18 +36,7 @@ async def create_jtw_token(
     login: user_schemas.LoginInfo,
     db: sqlalchemy_asyncio.AsyncSession = fastapi.Depends(dependencies.get_db),
 ):
-    user = (
-        (
-            await db.execute(
-                sqlalchemy_future.select(auth_models.User).filter(
-                    sqlalchemy_func.lower(auth_models.User.username)
-                    == sqlalchemy_func.lower(login.username)
-                )
-            )
-        )
-        .scalars()
-        .first()
-    )
+    user = await auth_crud.user.get_by_username(db, login.username)
     if user and login.password == user.password:
         access_token = create_access_token(dict(sub=user.username))
         refresh_token = create_access_token(dict(sub=user.username))
