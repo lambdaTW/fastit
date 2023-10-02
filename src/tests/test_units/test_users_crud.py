@@ -1,10 +1,8 @@
 import pytest
 import sqlalchemy
-from sqlalchemy import future as sqlalchemy_future
 from sqlalchemy.ext import asyncio as sqlalchemy_asyncio
 
 from app.crud import auth as auth_crud
-from app.models import auth as auth_models
 
 
 @pytest.mark.asyncio
