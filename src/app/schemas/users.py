@@ -6,6 +6,10 @@ class LoginInfo(pydantic.BaseModel):
     password: str
 
 
+class UserInfo(LoginInfo):
+    is_superuser: bool
+
+
 class HashInfo(pydantic.BaseModel):
     alg: str
     cost: int
