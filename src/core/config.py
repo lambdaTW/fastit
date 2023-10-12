@@ -15,3 +15,5 @@ class Settings(pydantic_settings.BaseSettings):
         env_file=PROJECT_PATH / ".env",
         extra="ignore",
     )
+    INIT_SUPERUSER_USERNAME: typing.Optional[str] = None
+    INIT_SUPERUSER_PASSWORD: typing.Optional[str] = None
