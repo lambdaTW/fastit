@@ -11,6 +11,7 @@
 老獅：我們可以自幹一個彩虹表，以下用英文大小寫的字元們做組合，產生兩位元的密碼表，並且使用 `sha256` 作為 `HASH` 演算法
 
 ```python
+import string
 import hashlib
 import itertools
 
@@ -41,7 +42,7 @@ aj,7d29d73105d636d04ca9fffcf979986d373ac874140bcb76ba86bc6975eae6a8
 老獅：為此我們可以為不同的密碼，加入鹽巴，也就是另外的字串去做 `HASH`
 
 ```python
-import secret
+import secrets
 import hashlib
 
 
